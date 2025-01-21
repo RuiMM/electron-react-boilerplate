@@ -101,13 +101,17 @@
     }
   },
   "dependencies": {
+    "@ant-design/icons": "^5.5.2",
     "@electron/notarize": "^2.3.2",
+    "antd": "^5.23.2",
     "electron-debug": "^3.2.0",
     "electron-log": "^4.4.8",
     "electron-updater": "^6.1.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.16.0"
+    "react-router-dom": "^6.16.0",
+    "source-map-support": "^0.5.21",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@electron/rebuild": "^3.3.0",
@@ -158,8 +162,8 @@
     "react-refresh": "^0.14.0",
     "react-test-renderer": "^18.2.0",
     "rimraf": "^5.0.1",
-    "sass": "^1.67.0",
-    "sass-loader": "^13.3.2",
+    "sass": "^1.83.4",
+    "sass-loader": "^13.3.3",
     "style-loader": "^3.3.3",
     "terser-webpack-plugin": "^5.3.9",
     "ts-jest": "^29.1.1",
@@ -168,7 +172,7 @@
     "tsconfig-paths-webpack-plugin": "^4.1.0",
     "typescript": "^5.2.2",
     "url-loader": "^4.1.1",
-    "webpack": "^5.88.2",
+    "webpack": "^5.97.1",
     "webpack-bundle-analyzer": "^4.9.1",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1",

@@ -8,10 +8,11 @@
  * When running `npm run build` or `npm run build:main`, this file is compiled to
  * `./src/main.js` using webpack. This gives us some performance wins.
  */
-import path from 'path';
-import { app, BrowserWindow, shell, ipcMain } from 'electron';
-import { autoUpdater } from 'electron-updater';
+import { app, BrowserWindow, ipcMain, shell } from 'electron';
 import log from 'electron-log';
+import { autoUpdater } from 'electron-updater';
+import fs from 'fs';
+import path from 'path';
 import MenuBuilder from './menu';
 import { resolveHtmlPath } from './util';
 
@@ -29,6 +30,24 @@ ipcMain.on('ipc-example', async (event, arg) => {
   const msgTemplate = (pingPong: string) => `IPC test: ${pingPong}`;
   console.log(msgTemplate(arg));
   event.reply('ipc-example', msgTemplate('pong'));
+});
+
+ipcMain.on('download-file', (event, fileName) => {
+  const filePath = path.join(__dirname, '../../assets/', fileName); // Ensure this path is correct
+  const savePath = path.join(app.getPath('downloads'), fileName);
+
+  fs.copyFile(filePath, savePath, (err) => {
+    if (err) {
+      console.error('File download failed:', err);
+      event.reply('download-file-response', {
+        success: false,
+        error: err.message,
+      });
+    } else {
+      console.log('File downloaded successfully');
+      event.reply('download-file-response', { success: true, path: savePath });
+    }
+  });
 });
 
 if (process.env.NODE_ENV === 'production') {

@@ -1,4 +1,4 @@
-import { Card, Col, message, Row } from 'antd';
+import { Button, Card, Col, message, Row } from 'antd';
 import { Link, Route, MemoryRouter as Router, Routes } from 'react-router-dom';
 import LaoGan from './laogan';
 // import './App.css';
@@ -9,7 +9,7 @@ function Hello() {
     window.electron?.ipcRenderer.sendMessage('download-file', 'laoganTmp.xlsx');
 
     // Listen for the response from the main process
-    window.electron?.ipcRenderer.on('download-file-response', (response) => {
+    window.electron?.ipcRenderer.once('download-file-response', (response) => {
       if (response.success) {
         message.success(`File downloaded to: ${response.path}`);
       } else {
@@ -27,6 +27,9 @@ function Hello() {
             extra={<Link to="laogan">前往</Link>}
             style={{ width: '100%' }}
           >
+            <Button type="primary" onClick={downloadTemplate}>
+              下载模板文件
+            </Button>
             <p>step1：上传文件</p>
             <p>step2：计算完毕点击下载即可</p>
           </Card>

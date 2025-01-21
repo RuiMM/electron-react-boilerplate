@@ -33,7 +33,9 @@ ipcMain.on('ipc-example', async (event, arg) => {
 });
 
 ipcMain.on('download-file', (event, fileName) => {
-  const filePath = path.join(__dirname, '../../assets/', fileName); // Ensure this path is correct
+  const filePath = app.isPackaged
+    ? path.join(process.resourcesPath, 'assets', fileName)
+    : path.join(__dirname, '../../assets', fileName);
   const savePath = path.join(app.getPath('downloads'), fileName);
 
   fs.copyFile(filePath, savePath, (err) => {
